@@ -1,0 +1,24 @@
+# Github and background content for aws-fsx-csi-driver
+# https://github.com/kubernetes-sigs/aws-fsx-csi-driver
+# https://www.kubeflow.org/docs/distributions/aws/customizing-aws/storage/#amazon-fsx-for-lustre
+# https://github.com/kubeflow/manifests/tree/master/distributions/aws/aws-fsx-csi-driver/base
+# https://github.com/kubernetes-sigs/aws-fsx-csi-driver/tree/master/examples/kubernetes/dynamic_provisioning
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aws-fsx-csi-driver
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: <<__git_repo.url__>>
+    targetRevision: <<__git_repo.target_revision__>>
+    path: distribution/aws-fsx-csi-driver
+    kustomize:
+      version: v4.0.5
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

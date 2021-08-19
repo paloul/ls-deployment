@@ -82,7 +82,7 @@ This command will take several minutes as `eksctl` creates the entire stack with
 supporting services inside AWS, i.e. VPC, Subnets, Security Groups, Route Tables,  
 in addition to the cluster itself. Once completed you should see the following:
 ```
-[✓]  EKS cluster "babylon-2" in "us-west-2" region is ready
+[✓]  EKS cluster "hawkeye-1" in "us-west-2" region is ready
 ```
 With nothing else running on the cluster you can check `kubectl` and see similar output:  
 ```
@@ -105,7 +105,7 @@ One node group starts up a min 2 EC2 machines that charge by the hour. The other
 are setup to scale down to 0 and only ramp up when pods are needed. In order to avoid being  
 charged while not in use please use the following command to delete your cluster:
 ```
-eksctl delete cluster -f aws-eks-cluster-spec-2.yaml --profile bl-babylon
+eksctl delete cluster -f aws-eks-cluster-spec.yaml --profile bl-lifesignals
 ```
 
 ## Step 3 - Create the policies and roles

@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kube-system
+
+# Helpful links
+# https://github.com/kubernetes-sigs/aws-efs-csi-driver
+# https://aws.amazon.com/blogs/containers/introducing-efs-csi-dynamic-provisioning/
+# https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/examples/kubernetes/dynamic_provisioning/README.md
+# https://www.kubeflow.org/docs/distributions/aws/customizing-aws/storage/#amazon-efs
+
+resources:
+- github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.3
+- efs-storage-class.yaml

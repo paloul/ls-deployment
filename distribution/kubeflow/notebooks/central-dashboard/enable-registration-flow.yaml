@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: centraldashboard
+  namespace: kubeflow
+spec:
+  template:
+    spec:
+      containers:
+      # https://www.kubeflow.org/docs/components/multi-tenancy/getting-started/#automatic-creation-of-profiles
+      - name: centraldashboard
+        env:
+        - name: REGISTRATION_FLOW
+          value: "true"

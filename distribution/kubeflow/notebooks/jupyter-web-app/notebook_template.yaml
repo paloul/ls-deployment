@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notebook-template
+data:
+  notebook_template.yaml: | 
+    apiVersion: kubeflow.org/v1beta1
+    kind: Notebook
+    metadata:
+      name: {name}
+      namespace: {namespace}
+      labels:
+        app: {name}
+      annotations:
+        notebooks.kubeflow.org/server-type: ""
+    spec:
+      template:
+        spec:
+          serviceAccountName: {serviceAccount}
+          containers:
+            - name: {name}
+              image: ""
+              imagePullPolicy: Always
+              volumeMounts: []
+              env: 
+                - name: NB_USER
+                  value: {namespace}
+                - name: NB_UID
+                  value: "1001"
+                - name: NB_NAME
+                  value: {name}
+              resources:
+                requests:
+                  cpu: "0.1"
+                  memory: "0.1Gi"
+          volumes: []
+          tolerations: []

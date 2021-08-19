@@ -1,0 +1,41 @@
+apiVersion: kubeflow.org/v1beta1
+kind: Profile
+metadata:
+  name: zghazal
+spec:
+  owner:
+    kind: User
+    name: zghazal@beyond.ai
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-adnoc-hck-pv-zghazal
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: efs-sc
+  claimRef:
+    name: efs-adnoc-hck
+    namespace: zghazal
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-4f415248::fsap-0a980abfa5232b806 # This is the important piece. The same efs vol access point is shared for a project
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-adnoc-hck
+  namespace: zghazal
+spec:
+  storageClassName: efs-sc
+  volumeName: efs-adnoc-hck-pv-zghazal
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
