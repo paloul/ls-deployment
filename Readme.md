@@ -1,9 +1,6 @@
-# Kubeflow PoC (for AWS)
+# Life Signals (Hawkeye) Environment (for AWS)
 
-This repo contains a poc effort for Kubeflow up on AWS EKS. Ideally, it is to help explore the capabilities of kubeflow in regards to the larger Babylon effort.
-
-The actual kubeflow instructions are available at [Install Kubeflow on AWS](https://www.kubeflow.org/docs/aws/deploy/install-kubeflow/). Another good documentation page is [End-to-End Kubeflow on AWS](https://www.kubeflow.org/docs/distributions/aws/aws-e2e/)
-
+This repo contains a poc effort up on AWS EKS. Ideally, it is to help create the environment on AWS with EKS and deploy the application on it.
 
 ### Prerequisites
 --------------------------------------------
@@ -33,22 +30,12 @@ The actual kubeflow instructions are available at [Install Kubeflow on AWS](http
     * `curl --silent --location "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.0.5/kustomize_v4.0.5_linux_amd64.tar.gz" | tar xz -C /tmp`
     * `sudo mv /tmp/kustomize /usr/local/bin`
     * `kustomize version`
-* kfctl - *(official CLI for Kubeflow)*
-    * OSX Installation - v1.2.0
-        * `curl --silent --location "https://github.com/kubeflow/kfctl/releases/download/v1.2.0/kfctl_v1.2.0-0-gbc038f9_darwin.tar.gz" | tar xz -C /tmp`
-        * `sudo mv /tmp/kfctl /usr/local/bin`
-        * `kfctl version`
-    * Linux Installation - v1.2.0
-        * `curl --silent --location "https://github.com/kubeflow/kfctl/releases/download/v1.2.0/kfctl_v1.2.0-0-gbc038f9_linux.tar.gz" | tar xz -C /tmp`
-        * `sudo mv /tmp/kfctl /usr/local/bin`
-        * `kfctl version`
 
 ### Install Instructions
 --------------------------------------------
-Before you being with Kubeflow, you must have a cluster up and running with AWS EKS.  
+Before you deploy, you must have a cluster up and running with AWS EKS.  
 Use the `eksctl` tool to create a specific cluster up on AWS for your needs.  
-Name it what you want and take note of that name as you will need it with `kfctl`.  
-## Step 1 - Configure `awscli` and `eksctl`
+## Step 1 - Configure `awscli`
 Define your key and secret in `~/.aws/credentials`
 ```
 [default]
@@ -61,12 +48,14 @@ Define your profile information (AWS Organization) in `~/.aws/config`.
 region = us-west-2
 output = json
 
-[profile bl-babylon]
-role_arn = arn:aws:iam::562046374233:role/BabylonOrgAccountAccessRole
-source_profile = default
+[profile bl-lifesignals]
+region = us-west-2
+output = json
+role_arn = arn:aws:iam::113151489485:role/admin-lifesignals-subaccount
+source_profile = bl-paloul
 ```
 ***A sysadmin should have already given your AWS IAM (i.e. paloul, mshirdel) the appropriate  
-policy to be able to assume the Babylon sub-account role, `BabylonOrgAccountAccessRole`.***
+policy to be able to assume the Life Signals sub-account role, `admin-lifesignals-subaccount`.***
 
 You must execute `awscli` or `eksctl` commands while assuming the correct role in order  
 to deploy the cluster under the right account. This is done with either the `--profile`  
@@ -75,30 +64,19 @@ before executing any commands. Visit [here](https://docs.aws.amazon.com/cli/late
 
 Execute the following command to verify you configured `awscli` and `eksctl` correctly:
 ```
-╰─❯ eksctl get cluster --verbose 4 --profile bl-babylon
-[▶]  role ARN for the current session is "arn:aws:sts::562046374233:assumed-role/BabylonOrgAccountAccessRole/1618011239640991900"
+╰─❯ eksctl get cluster --verbose 4 --profile bl-lifesignals
+[▶]  role ARN for the current session is "arn:aws:sts::113151489485:assumed-role/admin-lifesignals-subaccount/1618011239640991900"
 [ℹ]  eksctl version 0.44.0
 [ℹ]  using region us-west-2
 No clusters found
 ```
-You can verify you are using the right profile with the following:
-```
-aws sts get-caller-identity
-```
-You should receive the following JSON listing the use of the `BabylonOrgAccountAccessRole` role.
-```
-{
-    "UserId": "AROAYFXETCFMU6ZHKQUOR:botocore-session-1618010824",
-    "Account": "562046374233",
-    "Arn": "arn:aws:sts::562046374233:assumed-role/BabylonOrgAccountAccessRole/botocore-session-1618010824"
-}
-```  
+You will see any existing EKS clusters in that account you have access to.
 ----
 ## Step 2 - Create EKS Cluster - [Additional Info](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html)
 Execute the following `eksctl` command to create a cluster under the AWS Babylon account. You  
 should be in the same directory as the file `aws-eks-cluster.yaml`. 
 ```
-eksctl create cluster -f aws-eks-cluster-spec-2.yaml --profile bl-babylon
+eksctl create cluster -f aws-eks-cluster-spec.yaml --profile bl-lifesignals
 ```
 This command will take several minutes as `eksctl` creates the entire stack with  
 supporting services inside AWS, i.e. VPC, Subnets, Security Groups, Route Tables,  
