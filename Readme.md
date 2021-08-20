@@ -268,3 +268,10 @@ Fill this in
 
 ## Step 5 - Deploy the pieces with ArgoCD
 Once the environment is setup proceed to deploy the application with ArgoCD. 
+1. Run the setup_repo.sh script to populate files with config values from setup_repo.conf
+2. Commit and push changes to target repo branch defined by `git_repo.url` and `git_repo.target_revision` in setup_repo.conf
+3. Start up externa-secret and argocd separately first:
+  - `kustomize build distribution/external-secrets/ | kubectl apply -f -`
+  - `kustomize build distribution/argocd/ | kubectl apply -f -`
+4. Finally roll out the main argocd hawkeye application that will instruct argocd to deploy all pieces
+  - `kubectl apply -f distribution/hawkeye.yaml`
