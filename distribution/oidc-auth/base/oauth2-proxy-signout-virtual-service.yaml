@@ -5,7 +5,7 @@ metadata:
   namespace: auth
 spec:
   gateways:
-  - kubeflow/kubeflow-gateway
+  - hawkeye/hawkeye-gateway
   hosts:
   - '*'
   http:

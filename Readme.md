@@ -109,6 +109,12 @@ eksctl delete cluster -f aws-eks-cluster-spec.yaml --profile bl-lifesignals
 ```
 
 ## Step 3 - Create the policies and roles
+We need to create policies and roles for each respective piece that needs it inside our cluster.  
+Make sure you are using the right AWS Profile. Set the following to make sure you use bl-lifesignals profile:  
+```
+export AWS_PROFILE=bl-lifesignals
+```
+
 ### <u>Kubernetes Cluster Autoscaler</u> - [Additional Info](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)
 We need to create the appropriate policy and role for the Cluster Autoscaler.
 
@@ -126,10 +132,10 @@ to it using eksctl.
 # Replace the attach-policy-arn field with the arn of the policy created above. 
 # Put your cluster name in the cluster field.
 eksctl create iamserviceaccount \
-  --cluster=babylon-2 \
+  --cluster=hawkeye-1 \
   --namespace=kube-system \
   --name=cluster-autoscaler \
-  --attach-policy-arn=arn:aws:iam::562046374233:policy/AmazonEKSClusterAutoscalerPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterAutoscalerPolicy \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -153,10 +159,10 @@ to it using eksctl.
 # Replace the attach-policy-arn field with the arn of the policy created above. 
 # Put your cluster name in the cluster field.
 eksctl create iamserviceaccount \
-  --cluster=babylon-2 \
+  --cluster=hawkeye-1 \
   --namespace=kube-system \
   --name=external-dns \
-  --attach-policy-arn=arn:aws:iam::562046374233:policy/AmazonEKSClusterExternalDnsPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterExternalDnsPolicy \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -173,7 +179,7 @@ version is used, then make sure to update the IAM Policy for the LB Controller h
 # Create an IAM policy from the json already downloaded, lb-controller-iam_policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-name AWSLoadBalancerControllerIAMPolicyV220 \
     --policy-document file://lb-controller-v2_2_0-iam_policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
@@ -184,10 +190,10 @@ to it using eksctl.
 # aws-load-balancer-controller in the kube-system namespace
 # Get the policy ARN from the AWS IAM Policy Console
 eksctl create iamserviceaccount \
-  --cluster=babylon-2 \
+  --cluster=hawkeye-1 \
   --namespace=kube-system \
-  --name=aws-load-balancer-controller \
-  --attach-policy-arn=arn:aws:iam::562046374233:policy/AWSLoadBalancerControllerIAMPolicy \
+  --name=aws-load-balancer-controller-v220 \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicyV220 \
   --override-existing-serviceaccounts \
   --approve                
 ```
@@ -210,10 +216,10 @@ to it using eksctl.
 # Get the policy ARN from the AWS IAM Policy Console
 # Update the cluster name if different
 eksctl create iamserviceaccount \
-  --cluster=babylon-2 \
+  --cluster=hawkeye-1 \
   --namespace=kube-system \
   --name=external-secrets \
-  --attach-policy-arn=arn:aws:iam::562046374233:policy/AWSExternalSecretsBabylon2IAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsBabylon2IAMPolicy \
   --override-existing-serviceaccounts \
   --approve                
 ```
@@ -237,75 +243,28 @@ to it using eksctl.
 # Update the cluster value
 # Update the attach-policy-arn value with the arn of the policy created above
 eksctl create iamserviceaccount \
-  --cluster=babylon-2 \
+  --cluster=hawkeye-1 \
   --namespace=cert-manager \
   --name=cert-manager \
-  --attach-policy-arn=arn:aws:iam::562046374233:policy/AWSCertManagerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSCertManagerIAMPolicy \
   --override-existing-serviceaccounts \
   --approve                
 ```
-### <u>AWS FSX Lustre CSI Driver</u> - [Additional Info](https://github.com/kubernetes-sigs/aws-fsx-csi-driver)
-Amazon FSx for Lustre provides a high-performance file system optimized for fast processing for machine learning and  
-high performance computing (HPC) workloads. AWS FSx for Lustre CSI Driver can help Kubernetes users easily leverage this service.  
 
-Lustre is another file system that supports ReadWriteMany. One difference between Amazon EFS and Lustre is that Lustre can be  
-used to cache training data with direct connectivity to Amazon S3 as the backing store. With this configuration, you don’t need  
-to transfer data to the file system before using the volume.  
+## Step 4 - Create and Configure the supporting managed resources/services/properties
+### <u>Elasticache - Redis</u> - General cache service for cluster
+The Authentication piece requires a Redis server. Create one with AWS Elasticache.
+Record the hostname and update the setup_repo.conf file with the Redis host for the 
+field `<<__oidc.redis.connection_url__>>`. 
 
-The Amazon FSx for Lustre Container Storage Interface (CSI) Driver implements CSI specification for container orchestrators (CO)  
-to manage lifecycle of Amazon FSx for Lustre filesystems.
-```
-# Create an IAM policy from the json already downloaded, aws-fsx-csi-driver-policy.json
-# This mightve already been done, you will see an error if the Policy already exists, ignore.
-aws iam create-policy \
-    --policy-name AWSFsxCsiDriverIAMPolicy \
-    --policy-document file://aws-fsx-csi-driver-policy.json
-# Note the ARN returned in the output for use in a later step.
-```
-You can now make a new role with policy attached. You can create an IAM role and attach an IAM policy  
-to it using eksctl.
-```
-# Create an IAM role and annotate the Kubernetes service account named 
-# fsx-csi-controller-sa in the kubeflow namespace.
-# Update the cluster value
-# Update the attach-policy-arn value with the arn of the policy created above
-eksctl create iamserviceaccount \
-  --cluster=babylon-2 \
-  --namespace=kubeflow \
-  --name=fsx-csi-controller-sa \
-  --attach-policy-arn=arn:aws:iam::562046374233:policy/AWSFsxCsiDriverIAMPolicy \
-  --override-existing-serviceaccounts \
-  --approve
-```
+### <u>AWS Cognito and Azure AD Enterprise App</u> - User Id Provider and SAML SSO
+Fill this in
 
-### <u>AWS EFS CSI Driver</u> - [Additional Info](https://github.com/kubernetes-sigs/aws-efs-csi-driver)
-Amazon EFS is managed NFS in AWS. Amazon EFS supports ReadWriteMany access mode, which means the volume can be mounted as  
-read-write by many nodes. It is very useful for creating a shared filesystem that can be mounted into pods such as Jupyter.  
-For example, one group can share datasets or models across an entire team. By default, the Amazon EFS CSI driver is not  
-enabled and you need to follow steps to install it.  
+### <u>Update Role ARNs in setup_repo.sh</u> - Role Permissions
+Fill this in
 
-The Amazon EFS Container Storage Interface (CSI) Driver implements CSI specification for container orchestrators (CO)  
-to manage lifecycle of Amazon EFS filesystems.
-```
-# Create an IAM policy from the json already downloaded, aws-efs-csi-driver-policy.json
-# This mightve already been done, you will see an error if the Policy already exists, ignore.
-aws iam create-policy \
-    --policy-name AWSEFSCsiDriverIAMPolicy \
-    --policy-document file://aws-efs-csi-driver-policy.json
-# Note the ARN returned in the output for use in a later step.
-```
-You can now make a new role with policy attached. You can create an IAM role and attach an IAM policy  
-to it using eksctl.
-```
-# Create an IAM role and annotate the Kubernetes service account named 
-# efs-csi-controller-sa in the kube-system namespace.
-# Update the cluster value
-# Update the attach-policy-arn value with the arn of the policy created above
-eksctl create iamserviceaccount \
-  --cluster=babylon-2 \
-  --namespace=kube-system \
-  --name=efs-csi-controller-sa \
-  --attach-policy-arn=arn:aws:iam::562046374233:policy/AWSEFSCsiDriverIAMPolicy \
-  --override-existing-serviceaccounts \
-  --approve
-```
+### <u>Define secrets in Secret Manager</u> - Define secrets with keys defined in setup_repo.sh
+Fill this in
+
+## Step 5 - Deploy the pieces with ArgoCD
+Once the environment is setup proceed to deploy the application with ArgoCD. 

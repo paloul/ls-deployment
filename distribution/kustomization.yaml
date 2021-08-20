@@ -6,7 +6,6 @@ resources:
   - argocd-applications/istio-operator.yaml
   - argocd-applications/istio.yaml    
   - argocd-applications/istio-resources.yaml
-  # - argocd-applications/knative.yaml
   
   # Pick *one* of the following applications 
   # - argocd-applications/cert-manager-self-signing.yaml
@@ -17,45 +16,14 @@ resources:
   # - argocd-applications/oidc-auth-on-cluster-keycloak.yaml
   - argocd-applications/oidc-auth-external.yaml
 
-  ## Kubeflow  
-  - argocd-applications/central-dashboard.yaml
-  - argocd-applications/profile-controller_access-management.yaml
-  - argocd-applications/kubeflow-namespace.yaml
-  # - argocd-applications/kubeflow-profiles.yaml # All this does is create a dummy profile
-  - argocd-applications/kubeflow-roles.yaml
-  # - argocd-applications/pipelines-base.yaml
-  - argocd-applications/pipelines-iam-user.yaml
-  # - argocd-applications/pipelines-iam-roles-for-service-accuonts.yaml
-  # - argocd-applications/pipelines-kube2iam.yaml
-  - argocd-applications/katib.yaml
-  # - argocd-applications/kfserving.yaml
-  - argocd-applications/pod-defaults.yaml
-  - argocd-applications/jupyter-web-app.yaml
-  - argocd-applications/notebook-controller.yaml
-  - argocd-applications/tensorboard-controller.yaml
-  - argocd-applications/tensorboards-web-app.yaml
-  - argocd-applications/volumes-web-app.yaml # Disable if the experimental versions in Contrib are active
-  - argocd-applications/tensorflow-operator.yaml
-  - argocd-applications/pytorch-operator.yaml
-  - argocd-applications/mpi-operator.yaml
-  - argocd-applications/mxnet-operator.yaml
-  - argocd-applications/xgboost-operator.yaml
-
   ## System
-  # - argocd-applications/aws-fsx-csi-driver.yaml
-  - argocd-applications/aws-efs-csi-driver.yaml
   - argocd-applications/aws-node-termination-handler.yaml
   - argocd-applications/cluster-autoscaler.yaml
   - argocd-applications/aws-load-balancer-controller.yaml
   - argocd-applications/external-dns.yaml
   - argocd-applications/external-secrets.yaml
   - argocd-applications/metrics-server.yaml
-  # - argocd-applications/sealed-secrets.yaml
 
-  ## Contrib
-  - argocd-applications/mlflow.yaml
-  # - argocd-applications/experimental-pvcviewer-controller.yaml
-  # - argocd-applications/experimental-volumes-web-app.yaml
-
-  ## Beyond Limits Babylon Customization 
-  # - argocd-applications/project-profiles/adnoc-hck.yaml # Project is not live as of August 2021
+  ## Hawkeye
+  - argocd-applications/hawkeye-dashboard.yaml
+  # - argocd-applications/hawkeye-perfecta-cluster.yaml
