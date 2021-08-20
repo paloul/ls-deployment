@@ -21,7 +21,7 @@ metadata:
   # Name of your cluster, change to whatever you find fit.
   # If changed, make sure to change all nodegroup tags from 
   # 'k8s.io/cluster-autoscaler/babylon-2: "owned"' --> 'k8s.io/cluster-autoscaler/your-new-name: "owned"'
-  name: hawkeye-1
+  name: hawkeye
   # choose your region wisely, this will significantly impact the cost incurred
   region: us-west-2 # Oregon
   # 1.14 Kubernetes version since Kubeflow 1.0 officially supports the same
@@ -31,7 +31,7 @@ metadata:
     environment: development
     creator: paloul
     project: hawkeye
-    cluster: hawkeye-1
+    cluster: hawkeye
 
 iam:
   # https://eksctl.io/usage/schema/#iam-withOIDC
@@ -68,10 +68,10 @@ availabilityZones: ["us-west-2a", "us-west-2b"]
 
 nodeGroups:
   - name: ng-1
-    desiredCapacity: 3
+    desiredCapacity: 1
     minSize: 1
     maxSize: 6 
-    volumeSize: 120
+    volumeSize: 80
     volumeType: gp3
     instanceType: m5a.large
     availabilityZones: ["us-west-2a"]
@@ -81,11 +81,9 @@ nodeGroups:
       # EC2 tags required for cluster-autoscaler auto-discovery
       k8s.io/cluster-autoscaler/node-template/label/lifecycle: OnDemand
       k8s.io/cluster-autoscaler/enabled: "true"
-      k8s.io/cluster-autoscaler/hawkeye-1: "owned"
+      k8s.io/cluster-autoscaler/hawkeye: "owned"
     iam:
       withAddonPolicies:
-        efs: true
-        fsx: true
         albIngress: true
         autoScaler: true
         cloudWatch: true

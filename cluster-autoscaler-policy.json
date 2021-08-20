@@ -2,17 +2,36 @@
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Sid": "clusterAutoscalerAll",
+            "Effect": "Allow",
             "Action": [
-                "autoscaling:DescribeAutoScalingGroups",
-                "autoscaling:DescribeAutoScalingInstances",
-                "autoscaling:DescribeLaunchConfigurations",
+                "ec2:DescribeLaunchTemplateVersions",
                 "autoscaling:DescribeTags",
-                "autoscaling:SetDesiredCapacity",
+                "autoscaling:DescribeLaunchConfigurations",
+                "autoscaling:DescribeAutoScalingInstances",
+                "autoscaling:DescribeAutoScalingGroups"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "clusterAutoscalerOwn",
+            "Effect": "Allow",
+            "Action": [
+                "autoscaling:UpdateAutoScalingGroup",
                 "autoscaling:TerminateInstanceInAutoScalingGroup",
-                "ec2:DescribeLaunchTemplateVersions"
+                "autoscaling:SetDesiredCapacity"
             ],
             "Resource": "*",
-            "Effect": "Allow"
+            "Condition": {
+                "StringEquals": {
+                    "autoscaling:ResourceTag/k8s.io/cluster-autoscaler/enabled": [
+                        "true"
+                    ],
+                    "autoscaling:ResourceTag/kubernetes.io/cluster/my-cluster": [
+                        "owned"
+                    ]
+                }
+            }
         }
     ]
 }
