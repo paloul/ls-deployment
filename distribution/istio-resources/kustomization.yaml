@@ -8,6 +8,4 @@ resources:
 - envoy-filter-proxy-protocol.yaml
 - gateway-authorizationpolicy.yaml
 - kubeflow-cluster-roles.yaml
-#- kubeflow-gateway.yaml
-#- kubeflow-gateway-cert.yaml
 # - monitoring/
