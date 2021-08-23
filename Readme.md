@@ -132,7 +132,7 @@ to it using eksctl.
 # Replace the attach-policy-arn field with the arn of the policy created above. 
 # Put your cluster name in the cluster field.
 eksctl create iamserviceaccount \
-  --cluster=hawkeye-1 \
+  --cluster=hawkeye \
   --namespace=kube-system \
   --name=cluster-autoscaler \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterAutoscalerPolicy \
@@ -159,7 +159,7 @@ to it using eksctl.
 # Replace the attach-policy-arn field with the arn of the policy created above. 
 # Put your cluster name in the cluster field.
 eksctl create iamserviceaccount \
-  --cluster=hawkeye-1 \
+  --cluster=hawkeye \
   --namespace=kube-system \
   --name=external-dns \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterExternalDnsPolicy \
@@ -190,7 +190,7 @@ to it using eksctl.
 # aws-load-balancer-controller in the kube-system namespace
 # Get the policy ARN from the AWS IAM Policy Console
 eksctl create iamserviceaccount \
-  --cluster=hawkeye-1 \
+  --cluster=hawkeye \
   --namespace=kube-system \
   --name=aws-load-balancer-controller-v220 \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicyV220 \
@@ -204,7 +204,7 @@ Create the policy and the role to access the Secret stoe in AWS Secret Manager.
 # Create an IAM policy from the json already downloaded, external-secrets-iam-policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSExternalSecretsBabylon2IAMPolicy \
+    --policy-name AWSExternalSecretsDevHawkeyeIAMPolicy \
     --policy-document file://external-secrets-iam-policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
@@ -216,10 +216,10 @@ to it using eksctl.
 # Get the policy ARN from the AWS IAM Policy Console
 # Update the cluster name if different
 eksctl create iamserviceaccount \
-  --cluster=hawkeye-1 \
+  --cluster=hawkeye \
   --namespace=kube-system \
   --name=external-secrets \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsBabylon2IAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsDevHawkeyeIAMPolicy \
   --override-existing-serviceaccounts \
   --approve                
 ```
@@ -243,7 +243,7 @@ to it using eksctl.
 # Update the cluster value
 # Update the attach-policy-arn value with the arn of the policy created above
 eksctl create iamserviceaccount \
-  --cluster=hawkeye-1 \
+  --cluster=hawkeye \
   --namespace=cert-manager \
   --name=cert-manager \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSCertManagerIAMPolicy \
