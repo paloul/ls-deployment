@@ -11,10 +11,10 @@ spec:
     chart: cluster-autoscaler
     helm:
       parameters:
-        - name: rbac.serviceAccount.annotations.eks\.amazonaws\.com/role-arn
-          value: <<__role_arn.cluster_autoscaler__>>
-        - name: rbac.serviceAccount.create
-          value: "true"
+        - name: serviceAccount.name
+          value: <<__serviceAccount_name.cluster_autoscaler__>>
+        - name: serviceAccount.create
+          value: "false"
         - name: rbac.create
           value: "true"
         - name: fullnameOverride

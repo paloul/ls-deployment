@@ -179,7 +179,7 @@ version is used, then make sure to update the IAM Policy for the LB Controller h
 # Create an IAM policy from the json already downloaded, lb-controller-iam_policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicyV220 \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://lb-controller-v2_2_0-iam_policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
@@ -192,8 +192,8 @@ to it using eksctl.
 eksctl create iamserviceaccount \
   --cluster=hawkeye \
   --namespace=kube-system \
-  --name=aws-load-balancer-controller-v220 \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicyV220 \
+  --name=aws-load-balancer-controller \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicy \
   --override-existing-serviceaccounts \
   --approve                
 ```
