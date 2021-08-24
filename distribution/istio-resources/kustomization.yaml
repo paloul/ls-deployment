@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
 - envoy-filter-ingressgateway-settings.yaml
-- envoy-filter-kubeflow-userid.yaml
 - envoy-filter-proxy-protocol.yaml
 - gateway-authorizationpolicy.yaml
 - ingress-class.yaml
