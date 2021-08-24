@@ -27,7 +27,7 @@
                     "autoscaling:ResourceTag/k8s.io/cluster-autoscaler/enabled": [
                         "true"
                     ],
-                    "autoscaling:ResourceTag/kubernetes.io/cluster/my-cluster": [
+                    "autoscaling:ResourceTag/kubernetes.io/cluster/hawkeye": [
                         "owned"
                     ]
                 }
