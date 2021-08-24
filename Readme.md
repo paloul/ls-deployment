@@ -273,5 +273,8 @@ Once the environment is setup proceed to deploy the application with ArgoCD.
 3. Start up externa-secret and argocd separately first:
   - `kustomize build distribution/external-secrets/ | kubectl apply -f -`
   - `kustomize build distribution/argocd/ | kubectl apply -f -`
-4. Finally roll out the main argocd hawkeye application that will instruct argocd to deploy all pieces
+4. Get the admin password to the ArgoCD Dashboard and login. The ArgoCD Dashboard is only accessible via port forward:
+  - `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+  - `kubectl port-forward svc/argocd-server -n argocd 8888:80`
+5. Finally roll out the main argocd hawkeye application that will instruct argocd to deploy all pieces
   - `kubectl apply -f distribution/hawkeye.yaml`
