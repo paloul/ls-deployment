@@ -24,7 +24,7 @@ spec:
           imagePullPolicy: Always
           ports:
             - name: http
-              containerPort: 8888
+              containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
