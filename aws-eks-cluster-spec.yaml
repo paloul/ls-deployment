@@ -20,7 +20,7 @@ kind: ClusterConfig
 metadata:
   # Name of your cluster, change to whatever you find fit.
   # If changed, make sure to change all nodegroup tags from 
-  # 'k8s.io/cluster-autoscaler/babylon-2: "owned"' --> 'k8s.io/cluster-autoscaler/your-new-name: "owned"'
+  # 'k8s.io/cluster-autoscaler/cluster-name: "owned"' --> 'k8s.io/cluster-autoscaler/your-new-name: "owned"'
   name: hawkeye
   # choose your region wisely, this will significantly impact the cost incurred
   region: us-west-2 # Oregon
