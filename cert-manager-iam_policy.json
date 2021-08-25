@@ -15,6 +15,11 @@
               "route53:ChangeResourceRecordSets"
           ],
           "Resource": "arn:aws:route53:::hostedzone/*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": "route53:ListHostedZonesByName",
+        "Resource": "*"
       }
   ]
 }
