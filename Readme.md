@@ -112,6 +112,7 @@ eksctl delete cluster -f aws-eks-cluster-spec.yaml --profile bl-lifesignals
 We need to create policies and roles for each respective piece that needs it inside our cluster.  
 Make sure you are using the right AWS Profile. Set the following to make sure you use bl-lifesignals profile:  
 ```
+# !! IMPORTANT !!
 export AWS_PROFILE=bl-lifesignals
 ```
 
@@ -195,7 +196,7 @@ eksctl create iamserviceaccount \
   --name=aws-load-balancer-controller \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicy \
   --override-existing-serviceaccounts \
-  --approve                
+  --approve
 ```
 ### <u>External Secrets</u> - [Additional Info](https://github.com/external-secrets/kubernetes-external-secrets) 
 Kubernetes External Secrets allows you to use external secret management systems, like AWS Secrets Manager or HashiCorp Vault, to securely add secrets in Kubernetes.  
@@ -221,7 +222,7 @@ eksctl create iamserviceaccount \
   --name=external-secrets \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsDevHawkeyeIAMPolicy \
   --override-existing-serviceaccounts \
-  --approve                
+  --approve
 ```
 ### <u>Cert Manager</u> - [Additional Info](https://cert-manager.io/docs/)
 `cert-manager` is a native Kubernetes certificate management controller. It can help with issuing  
@@ -248,7 +249,7 @@ eksctl create iamserviceaccount \
   --name=cert-manager \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSCertManagerIAMPolicy \
   --override-existing-serviceaccounts \
-  --approve                
+  --approve
 ```
 
 ## Step 4 - Create and Configure the supporting managed resources/services/properties
