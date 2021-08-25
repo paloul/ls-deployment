@@ -41,7 +41,7 @@ vpc:
   cidr: 10.10.0.0/16
   # https://eksctl.io/usage/vpc-networking/#nat-gateway
   nat:
-    gateway: Single # other options: Disable, Single (default)
+    gateway: Single # other options: Disable, Single (default), HighlyAvailable 
 
   # https://eksctl.io/usage/vpc-networking/#managing-access-to-the-kubernetes-api-server-endpoints
   clusterEndpoints:
@@ -50,33 +50,25 @@ vpc:
 
 # Add all possible AZs to ensure nodes can be spun up in any AZ later on. 
 # THIS CAN'T BE CHANGED LATER. YOU WILL HAVE TO CREATE A NEW CLUSTER TO ADD NEW AZ SUPPORT.
-# This list applies to the whole clustr and isn't specific to nodegroups
-availabilityZones: ["us-west-2a", "us-west-2b"]
-
-# https://eksctl.io/usage/kms-encryption/
-#secretsEncryption:
-  # KMS key used for envelope encryption of Kubernetes secrets
-  #keyARN: arn:aws:kms:us-west-2:<account>:key/<key>
-
-# https://eksctl.io/usage/schema/#fargateProfiles
-#fargateProfiles:
-  #- name: fp-babylon
-    #selectors:
-      # All workloads in the "fp-babylon" Kubernetes namespace will be
-      # scheduled onto Fargate:
-      #- namespace: fp-babylon
+# This list applies to the whole cluster and isn't specific to nodegroups
+availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
 
 nodeGroups:
-  - name: ng-1
+  - name: ng-util
     desiredCapacity: 1
     minSize: 1
-    maxSize: 6 
+    maxSize: 3
     volumeSize: 80
     volumeType: gp3
-    instanceType: m5a.large
-    availabilityZones: ["us-west-2a"]
+    instanceType: t3.small
+    availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
+    privateNetworking: true
     labels:
-      node-class: "worker-node"
+      node-class: "utility"
+    taints:
+      - key: only-utility
+        value: "true"
+        effect: NoSchedule
     tags:
       # EC2 tags required for cluster-autoscaler auto-discovery
       k8s.io/cluster-autoscaler/node-template/label/lifecycle: OnDemand
@@ -84,6 +76,38 @@ nodeGroups:
       k8s.io/cluster-autoscaler/hawkeye: "owned"
     iam:
       withAddonPolicies:
+        ebs: true
+        fsx: true
+        efs: true
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+
+  - name: ng-frontend
+    desiredCapacity: 1
+    minSize: 1
+    maxSize: 3
+    volumeSize: 80
+    volumeType: gp3
+    instanceType: t3.small
+    availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
+    privateNetworking: true
+    labels:
+      node-class: "front-end"
+    taints:
+      - key: only-frontend
+        value: "true"
+        effect: NoSchedule
+    tags:
+      # EC2 tags required for cluster-autoscaler auto-discovery
+      k8s.io/cluster-autoscaler/node-template/label/lifecycle: OnDemand
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/hawkeye: "owned"
+    iam:
+      withAddonPolicies:
+        ebs: true
+        fsx: true
+        efs: true
         albIngress: true
         autoScaler: true
         cloudWatch: true
