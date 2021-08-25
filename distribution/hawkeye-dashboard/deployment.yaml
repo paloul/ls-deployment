@@ -35,3 +35,12 @@ spec:
               path: /
               port: http
           resources: {}
+      nodeSelector:
+        node-class: "front-end"
+        node-lifecycle: "OnDemand"
+      tolerations:
+      - key: "only-frontend"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+
