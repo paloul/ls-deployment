@@ -34,7 +34,13 @@ spec:
             httpGet:
               path: /
               port: http
-          resources: {}
+          resources: 
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "1.5Gi"
+              cpu: "1500m"
       nodeSelector:
         node-class: "front-end"
         node-lifecycle: "OnDemand"
