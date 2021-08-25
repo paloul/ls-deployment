@@ -7,14 +7,14 @@ spec:
   project: default
   source:
     repoURL: https://kubernetes.github.io/autoscaler
-    targetRevision: 9.10.5
+    targetRevision: 9.9.2
     chart: cluster-autoscaler
     helm:
       parameters:
-        - name: serviceAccount.name
-          value: <<__serviceAccount_name.cluster_autoscaler__>>
-        - name: serviceAccount.create
-          value: "false"
+        - name: rbac.serviceAccount.annotations.eks\.amazonaws\.com/role-arn
+          value: <<__role_arn.cluster_autoscaler__>>
+        - name: rbac.serviceAccount.create
+          value: "true"
         - name: rbac.create
           value: "true"
         - name: fullnameOverride
@@ -22,9 +22,9 @@ spec:
         - name: cloudProvider
           value: aws
         - name: image.repository
-          value: k8s.gcr.io/autoscaling/cluster-autoscaler
+          value: us.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler
         - name: image.tag
-          value: v1.21.0
+          value: v1.20.0
         - name: autoDiscovery.clusterName
           value: <<__cluster_name__>>
         - name: autoDiscovery.enabled
