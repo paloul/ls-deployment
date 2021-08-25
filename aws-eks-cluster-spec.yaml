@@ -49,7 +49,6 @@ nodeGroups:
     volumeType: gp3
     instanceType: t3.small
     availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
-    privateNetworking: true
     labels:
       node-class: "utility"
       node-lifecycle: "OnDemand"
@@ -76,7 +75,6 @@ nodeGroups:
     volumeType: gp3
     instanceType: t3.small
     availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
-    privateNetworking: true
     labels:
       node-class: "front-end"
       node-lifecycle: "OnDemand"
