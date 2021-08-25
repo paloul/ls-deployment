@@ -65,13 +65,14 @@ nodeGroups:
     privateNetworking: true
     labels:
       node-class: "utility"
+      lifecycle: "OnDemand"
     taints:
-      - key: only-utility
-        value: "true"
-        effect: NoSchedule
+      only-utility: "true:NoSchedule"
     tags:
       # EC2 tags required for cluster-autoscaler auto-discovery
+      k8s.io/cluster-autoscaler/node-template/label/node-class: utility
       k8s.io/cluster-autoscaler/node-template/label/lifecycle: OnDemand
+      k8s.io/cluster-autoscaler/node-template/taint/only-utility: "true:NoSchedule"
       k8s.io/cluster-autoscaler/enabled: "true"
       k8s.io/cluster-autoscaler/hawkeye: "owned"
     iam:
@@ -94,13 +95,14 @@ nodeGroups:
     privateNetworking: true
     labels:
       node-class: "front-end"
+      lifecycle: "OnDemand"
     taints:
-      - key: only-frontend
-        value: "true"
-        effect: NoSchedule
+      only-frontend: "true:NoSchedule"
     tags:
       # EC2 tags required for cluster-autoscaler auto-discovery
+      k8s.io/cluster-autoscaler/node-template/label/node-class: front-end
       k8s.io/cluster-autoscaler/node-template/label/lifecycle: OnDemand
+      k8s.io/cluster-autoscaler/node-template/taint/only-frontend: "true:NoSchedule"
       k8s.io/cluster-autoscaler/enabled: "true"
       k8s.io/cluster-autoscaler/hawkeye: "owned"
     iam:
