@@ -47,7 +47,7 @@ nodeGroups:
     maxSize: 6
     volumeSize: 80
     volumeType: gp3
-    instanceType: t3.small
+    instanceType: t3.medium
     availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
     labels:
       node-class: "utility"
