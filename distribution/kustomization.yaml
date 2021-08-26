@@ -6,9 +6,6 @@ resources:
   - argocd-applications/istio-operator.yaml
   - argocd-applications/istio.yaml    
   - argocd-applications/istio-resources.yaml
-  
-  # Pick *one* of the following applications 
-  # - argocd-applications/cert-manager-self-signing.yaml
   - argocd-applications/cert-manager-dns-01.yaml
 
   # Pick *one* of the following applications:  
@@ -17,7 +14,6 @@ resources:
   - argocd-applications/oidc-auth-external.yaml
 
   ## System
-  - argocd-applications/aws-node-termination-handler.yaml
   - argocd-applications/cluster-autoscaler.yaml
   - argocd-applications/aws-load-balancer-controller.yaml
   - argocd-applications/external-dns.yaml
