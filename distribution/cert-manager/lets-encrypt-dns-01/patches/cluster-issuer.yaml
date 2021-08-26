@@ -6,8 +6,11 @@ spec:
   selfSigned:
     $patch: delete
   acme:
-    email: <<__cert_manager.email_user__>>@<<__cert_manager.email_domain__>>
+    # ACME Server options:
+      # https://acme-v02.api.letsencrypt.org/directory - Used to generate valid cert, but has rate limits, use for prod
+      # https://acme-staging-v02.api.letsencrypt.org/directory - Used to generate dev cert without rate limits when deploying a lot
     server: <<__cert_manager.server__>>
+    email: <<__cert_manager.email_user__>>@<<__cert_manager.email_domain__>>
     privateKeySecretRef:
       name: gateways-issuer-account-key
     solvers:
