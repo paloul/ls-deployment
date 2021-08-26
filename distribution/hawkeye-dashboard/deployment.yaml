@@ -43,7 +43,6 @@ spec:
               cpu: "1900m"
       nodeSelector:
         node-class: "front-end"
-        node-lifecycle: "OnDemand"
       tolerations:
       - key: "only-frontend"
         operator: "Equal"

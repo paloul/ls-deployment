@@ -51,11 +51,9 @@ nodeGroups:
     availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
     labels:
       node-class: "utility"
-      node-lifecycle: "OnDemand"
     tags:
       # EC2 tags required for cluster-autoscaler auto-discovery
       k8s.io/cluster-autoscaler/node-template/label/node-class: utility
-      k8s.io/cluster-autoscaler/node-template/label/node-lifecycle: OnDemand
       k8s.io/cluster-autoscaler/enabled: "true"
       k8s.io/cluster-autoscaler/hawkeye: "owned"
     iam:
@@ -77,13 +75,11 @@ nodeGroups:
     availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
     labels:
       node-class: "front-end"
-      node-lifecycle: "OnDemand"
     taints:
       only-frontend: "true:NoSchedule"
     tags:
       # EC2 tags required for cluster-autoscaler auto-discovery
       k8s.io/cluster-autoscaler/node-template/label/node-class: front-end
-      k8s.io/cluster-autoscaler/node-template/label/node-lifecycle: OnDemand
       k8s.io/cluster-autoscaler/node-template/taint/only-frontend: "true:NoSchedule"
       k8s.io/cluster-autoscaler/enabled: "true"
       k8s.io/cluster-autoscaler/hawkeye: "owned"
