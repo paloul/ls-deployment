@@ -47,7 +47,7 @@ nodeGroups:
     maxSize: 6
     volumeSize: 80
     volumeType: gp3
-    instanceType: t3.medium # Try: t3a.large, m5a.large
+    instanceType: t3a.large 
     availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
     labels:
       node-class: "utility"
@@ -71,7 +71,7 @@ nodeGroups:
     maxSize: 3
     volumeSize: 80
     volumeType: gp3
-    instanceType: t3.small
+    instanceType: t3a.small
     availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
     labels:
       node-class: "front-end"
