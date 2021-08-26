@@ -35,6 +35,8 @@ spec:
           value: "true"
         - name: extraArgs.scale-down-enabled
           value: "true"
+        - name: extraArgs.aws-use-static-instance-list
+          value: "true"
         - name: rbac.create
           value: "true"
         - name: rbac.pspEnabled
