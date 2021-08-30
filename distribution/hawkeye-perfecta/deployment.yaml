@@ -30,6 +30,9 @@ spec:
           image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.lifesignals:0.0.4"
           imagePullPolicy: Always
           resources: 
+            requests:
+              memory: "3Gi"
+              cpu: "1500m"
             limits:
               memory: "7Gi"
               cpu: "1900m"
