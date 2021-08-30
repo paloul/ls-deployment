@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: hawkeye-gateway
-  namespace: hawkeye
+  namespace: hawkeye-dashboard
 spec:
   selector:
     istio: ingressgateway

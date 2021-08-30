@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: hawkeye-perfecta-gateway
-  namespace: hawkeye
+  namespace: hawkeye-perfecta
 spec:
   selector:
     istio: ingressgateway

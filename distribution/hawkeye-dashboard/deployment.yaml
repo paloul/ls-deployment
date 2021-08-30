@@ -4,7 +4,7 @@ metadata:
   name: hawkeye
   labels:
     app: hawkeye
-  namespace: hawkeye
+  namespace: hawkeye-dashboard
 spec:
   replicas: 1
   selector:

@@ -4,7 +4,7 @@ metadata:
   labels: 
     app: hawkeye-perfecta
   name: hawkeye-perfecta-api
-  namespace: hawkeye
+  namespace: hawkeye-perfecta
 spec:
   selector:
     app: hawkeye-perfecta

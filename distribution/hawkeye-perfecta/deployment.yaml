@@ -4,7 +4,7 @@ metadata:
   name: hawkeye-perfecta
   labels:
     app: hawkeye-perfecta
-  namespace: hawkeye
+  namespace: hawkeye-perfecta
 spec:
   replicas: 3
   selector:
@@ -57,7 +57,7 @@ spec:
             - name: CLUSTER.BOOTSTRAP.SERVICE-NAME
               value: "hawkeye-perfecta-internal"
             - name: CLUSTER.BOOTSTRAP.SERVICE-NAMESPACE
-              value: "hawkeye.svc.cluster.local"
+              value: "hawkeye-perfecta.svc.cluster.local"
             - name: LOGGING.LOGSTASH.SERVERS
               value: "hawkeye-logstash-service:5959" # Not active at the moment
             - name: ACTOR.SERIALIZE-MESSAGES

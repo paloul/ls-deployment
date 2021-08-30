@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: hawkeye
-  namespace: hawkeye
+  namespace: hawkeye-dashboard
 spec:
   gateways:
   - hawkeye-gateway
@@ -11,6 +11,6 @@ spec:
   http:
   - route:
     - destination:
-        host: hawkeye.hawkeye.svc.cluster.local
+        host: hawkeye.hawkeye-dashboard.svc.cluster.local
         port:
           number: 80
