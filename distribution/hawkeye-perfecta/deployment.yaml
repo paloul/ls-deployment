@@ -27,7 +27,7 @@ spec:
       containers:
         - name: hawkeye-perfecta
           securityContext: {}
-          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.lifesignals:0.0.4"
+          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.lifesignals:0.0.5"
           imagePullPolicy: Always
           resources: 
             requests:
