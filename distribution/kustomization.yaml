@@ -22,4 +22,4 @@ resources:
 
   ## Hawkeye
   - argocd-applications/hawkeye-dashboard.yaml
-  # - argocd-applications/hawkeye-perfecta-cluster.yaml
+  - argocd-applications/hawkeye-perfecta.yaml
