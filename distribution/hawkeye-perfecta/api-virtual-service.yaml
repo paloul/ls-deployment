@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: hawkeye-perfecta-api
+  namespace: hawkeye
+spec:
+  gateways:
+  - hawkeye-perfecta-gateway
+  hosts:
+  - <<__subdomain_perfecta__>>.<<__domain__>>
+  http:
+  - route:
+    - destination:
+        host: hawkeye-perfecta-api.hawkeye.svc.cluster.local
+        port:
+          number: 5000

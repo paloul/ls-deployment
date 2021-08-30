@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hawkeye-perfecta
+  labels:
+    app: hawkeye-perfecta
+  namespace: hawkeye
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hawkeye-perfecta
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: hawkeye-perfecta
+        actorSystemName: hawkeye-perfecta
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: hawkeye-perfecta
+          securityContext: {}
+          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.lifesignals:0.0.4"
+          imagePullPolicy: Always
+          resources: 
+            limits:
+              memory: "7Gi"
+              cpu: "1900m"
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8558
+          livenessProbe:
+            httpGet:
+              path: /alive
+              port: 8558
+          env:
+            - name: CLUSTER.DEPLOY.CLOUD
+              value: "true"
+            - name: PERFECTA.WORKERS.NUM
+              value: "1"
+            - name: PERFECTA.ENCRYPTED
+              value: "false"
+            - name: PERFECTA.TIMEOUT
+              value: "10 seconds"
+            - name: CLUSTER.TIMEOUT
+              value: "20 seconds"
+            - name: CLUSTER.MAX.NUM.NODES
+              value: "3"
+            - name: CLUSTER.BOOTSTRAP.SERVICE-NAME
+              value: "hawkeye-perfecta-internal"
+            - name: CLUSTER.BOOTSTRAP.SERVICE-NAMESPACE
+              value: "hawkeye.svc.cluster.local"
+            - name: LOGGING.LOGSTASH.SERVERS
+              value: "hawkeye-logstash-service:5959" # Not active at the moment
+            - name: ACTOR.SERIALIZE-MESSAGES
+              value: "off"
+            - name: PASSIVATE-IDLE-ENTITIES
+              value: "30 minutes"
+            - name: REMEMBER-ENTITIES
+              value: "on"
+            - name: REDIS.HOST
+              value: "hawkeye.nzlitf.ng.0001.usw2.cache.amazonaws.com"
+          ports:
+            - containerPort: 5000
+              name: http
+              protocol: TCP
+            - containerPort: 8558
+              name: management
+              protocol: TCP
+            - containerPort: 2550
+              name: remoting
+              protocol: TCP
+          volumeMounts: []
+      nodeSelector:
+        node-class: "perfecta"
+      tolerations:
+      - key: "only-perfecta"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+
