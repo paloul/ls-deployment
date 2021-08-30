@@ -4,7 +4,8 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - deployment.yaml
-- service.yaml
-- virtual-service.yaml
-- hawkeye-gateway-cert.yaml
-- hawkeye-gateway.yaml
+- internal-service.yaml
+- api-service.yaml
+- api-virtual-service.yaml
+- hawkeye-perfecta-gateway-cert.yaml
+- hawkeye-perfecta-gateway.yaml
