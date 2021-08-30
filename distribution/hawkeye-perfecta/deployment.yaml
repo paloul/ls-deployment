@@ -66,7 +66,7 @@ spec:
               value: "30 minutes"
             - name: REMEMBER-ENTITIES
               value: "on"
-            - name: REDIS.HOST
+            - name: REDIS.HOST # This value just needs the hostname, i.e. hawkeye.nzlitf.ng.0001.usw2.cache.amazonaws.com
               value: "<<__hawkeye.perfecta.redis.connection_url__>>"
           ports:
             - containerPort: 5000
