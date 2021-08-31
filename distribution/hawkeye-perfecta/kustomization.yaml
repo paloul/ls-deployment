@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
 - namespace.yaml
+- akka-pod-reader-rbac.yaml
+- akka-pod-reader-rbac-binding.yaml
 - deployment.yaml
 - internal-service.yaml
 - internal-virtual-service.yaml
