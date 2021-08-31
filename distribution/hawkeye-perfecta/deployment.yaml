@@ -53,16 +53,14 @@ spec:
               value: "false"
             - name: PERFECTA.TIMEOUT
               value: "10 seconds"
+            - name: CLUSTER.NAME
+              value: "hawkeye-perfecta"
             - name: CLUSTER.TIMEOUT
               value: "20 seconds"
             - name: CLUSTER.MAX.NUM.NODES
               value: "3"
-            - name: CLUSTER.BOOTSTRAP.SERVICE-NAME
-              value: "hawkeye-perfecta-internal"
-            - name: CLUSTER.BOOTSTRAP.SERVICE-NAMESPACE
-              value: "hawkeye-perfecta.svc.cluster.local"
-            - name: LOGGING.LOGSTASH.SERVERS
-              value: "hawkeye-logstash-service:5959" # Not active at the moment
+            - name: HTTP.SERVER-HEADER
+              value: "hawkeye-perfecta"
             - name: ACTOR.SERIALIZE-MESSAGES
               value: "off"
             - name: PASSIVATE-IDLE-ENTITIES
