@@ -22,6 +22,6 @@ spec:
     - port: 2550
     route:
     - destination:
-      host: hawkeye-perfecta-internal.hawkeye-perfecta.svc.cluster.local
-      port:
-        number: 2550
+        host: hawkeye-perfecta-internal.hawkeye-perfecta.svc.cluster.local
+        port:
+          number: 2550
