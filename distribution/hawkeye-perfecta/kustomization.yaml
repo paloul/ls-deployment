@@ -5,6 +5,7 @@ resources:
 - namespace.yaml
 - deployment.yaml
 - internal-service.yaml
+- internal-virtual-service.yaml
 - api-service.yaml
 - api-virtual-service.yaml
 - hawkeye-perfecta-gateway-cert.yaml
