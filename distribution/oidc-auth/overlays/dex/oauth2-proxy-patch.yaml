@@ -40,16 +40,16 @@ spec:
       - name: extraArgs.skip-provider-button
         value: "true"
       - name: extraArgs.cookie-domain
-        value: .<<__domain__>>
+        value: .hawkeye.beyond.ai
       - name: extraArgs.whitelist-domain
-        value: .<<__domain__>>
+        value: .hawkeye.beyond.ai
       - name: extraArgs.oidc-issuer-url
-        value: <<__oidc.issuer__>>
+        value: https://cognito-idp.us-west-2.amazonaws.com/us-west-2_2Sz336sah
       - name: extraArgs.login-url
-        value: "<<__oidc.issuer__>>/auth"
+        value: "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_2Sz336sah/auth"
       - name: extraArgs.oidc-jwks-url
-        value: "<<__oidc.issuer__>>/keys"
+        value: "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_2Sz336sah/keys"
       - name: extraArgs.redeem-url
-        value: "<<__oidc.issuer__>>/token"
+        value: "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_2Sz336sah/token"
       - name: extraArgs.skip-oidc-discovery
         value: "true"

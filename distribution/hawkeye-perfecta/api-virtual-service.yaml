@@ -7,7 +7,7 @@ spec:
   gateways:
   - hawkeye-perfecta-gateway
   hosts:
-  - <<__subdomain_perfecta__>>.<<__domain__>>
+  - perfecta.hawkeye.beyond.ai
   http:
   - route:
     - destination:

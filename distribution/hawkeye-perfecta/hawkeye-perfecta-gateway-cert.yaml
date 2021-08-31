@@ -8,6 +8,6 @@ spec:
   issuerRef:
     name: gateways-issuer
     kind: ClusterIssuer
-  commonName: <<__subdomain_perfecta__>>.<<__domain__>>
+  commonName: perfecta.hawkeye.beyond.ai
   dnsNames:
-    - <<__subdomain_perfecta__>>.<<__domain__>>
+    - perfecta.hawkeye.beyond.ai
