@@ -54,7 +54,7 @@ spec:
             - name: PERFECTA.TIMEOUT
               value: "10 seconds"
             - name: CLUSTER.NAME
-              value: "hawkeye-perfecta"
+              value: "hawkeye-perfecta" # Value needs to match the Deployment app labels. Used by Discovery kubernetes-api for lookup.
             - name: CLUSTER.TIMEOUT
               value: "20 seconds"
             - name: CLUSTER.MAX.NUM.NODES
