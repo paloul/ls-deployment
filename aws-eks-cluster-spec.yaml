@@ -42,7 +42,7 @@ availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
 
 nodeGroups:
   - name: ng-util
-    desiredCapacity: 2
+    desiredCapacity: 1
     minSize: 1
     maxSize: 6
     volumeSize: 80
@@ -93,12 +93,12 @@ nodeGroups:
         cloudWatch: true
 
   - name: ng-perfecta
-    desiredCapacity: 1
-    minSize: 1
+    desiredCapacity: 3
+    minSize: 3
     maxSize: 3
     volumeSize: 80
     volumeType: gp3
-    instanceType: t3a.large
+    instanceType: t3a.medium
     availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
     labels:
       node-class: "perfecta"
