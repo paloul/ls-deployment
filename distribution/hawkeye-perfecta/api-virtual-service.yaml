@@ -16,7 +16,7 @@ spec:
           number: 5000
     corsPolicy:
       allowCredentials: true
-      allowHeader:
+      allowHeaders:
       - content-type
       exposeHeaders:
       - x-custom-header
