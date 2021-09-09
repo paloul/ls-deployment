@@ -28,7 +28,5 @@ spec:
       - POST
       allowOrigin:
       - http://localhost:3000
-      - https://dashboard.hawkeye.beyond.ai
       allowOrigins:
       - exact: http://localhost:3000
-      - exact: https://dashboard.hawkeye.beyond.ai
