@@ -9,13 +9,17 @@ spec:
   hosts:
   - <<__subdomain_perfecta__>>.<<__domain__>>
   http:
-  - headers:
-      request:
-        set:
-          Access-Control-Allow-Origin: "http://localhost:3000"
-          Access-Control-Allow-Methods: "POST, GET, OPTIONS, DELETE"
-    route:
+  - route:
     - destination:
         host: hawkeye-perfecta-api.hawkeye-perfecta.svc.cluster.local
         port:
           number: 5000
+    corsPolicy:
+      allowCredentials: true
+      allowMethods:
+      - GET
+      - POST
+      - OPTIONS
+      maxAge: "24h"
+      allowOrigins:
+      - exact: "http://localhost:3000"
