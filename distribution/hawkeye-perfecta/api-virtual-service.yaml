@@ -16,17 +16,14 @@ spec:
           number: 5000
     corsPolicy:
       allowCredentials: true
-      allowHeaders:
-      - authorization
-      - proxy-authorization
+      allowHeader:
       - content-type
-      - x-forwarded-access-token
-      - x-forwarded-user
-      - x-forwarded-email
+      exposeHeaders:
+      - x-custom-header
       allowMethods:
       - GET
       - POST
-      allowOrigin:
-      - http://localhost:3000
+      - OPTIONS
+      maxAge: 24h
       allowOrigins:
       - exact: http://localhost:3000
