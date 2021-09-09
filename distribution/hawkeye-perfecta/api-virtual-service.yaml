@@ -17,11 +17,18 @@ spec:
     corsPolicy:
       allowCredentials: true
       allowHeaders:
-      - Authorization
-      - Content-Type
+      - authorization
+      - proxy-authorization
+      - content-type
+      - x-forwarded-access-token
+      - x-forwarded-user
+      - x-forwarded-email
       allowMethods:
       - GET
       - POST
+      allowOrigin:
+      - http://localhost:3000
+      - https://dashboard.hawkeye.beyond.ai
       allowOrigins:
       - exact: http://localhost:3000
       - exact: https://dashboard.hawkeye.beyond.ai
