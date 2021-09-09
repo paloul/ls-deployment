@@ -15,16 +15,12 @@ spec:
         port:
           number: 5000
     corsPolicy:
-      allowCredentials: true
-      allowHeaders:
-      - content-type
-      exposeHeaders:
-      - x-custom-header
+      allowCredentials: false
       allowMethods:
       - GET
       - POST
       - OPTIONS
-      maxAge: 24h
+      maxAge: "24h"
       allowOrigins:
       - exact: http://localhost:3000
       - exact: http://localhost:8080
