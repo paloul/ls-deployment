@@ -22,5 +22,4 @@ spec:
       - OPTIONS
       maxAge: "24h"
       allowOrigins:
-      - exact: http://localhost:3000
-      - exact: http://localhost:8080
+      - exact: "*"
