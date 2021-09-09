@@ -16,6 +16,9 @@ spec:
           number: 5000
     corsPolicy:
       allowCredentials: true
+      allowHeaders:
+      - Authorization
+      - Content-Type
       allowMethods:
       - GET
       - POST
