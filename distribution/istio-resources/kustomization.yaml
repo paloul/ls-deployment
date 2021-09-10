@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - envoy-filter-ingressgateway-settings.yaml
 - envoy-filter-proxy-protocol.yaml
+- envoy-filter-cors-bypass.yaml
 - gateway-authorizationpolicy.yaml
 - ingress-class.yaml
 - cluster-local-gateway.yaml
