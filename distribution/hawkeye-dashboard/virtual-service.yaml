@@ -12,6 +12,8 @@ spec:
   - name: "perfecta-route"
     match:
     - uri: 
+        prefix: "/perfecta/"
+    - uri:
         prefix: "/perfecta"
     rewrite:
       uri: "/"
