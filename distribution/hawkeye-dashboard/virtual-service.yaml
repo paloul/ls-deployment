@@ -9,7 +9,19 @@ spec:
   hosts:
   - <<__subdomain_dashboard__>>.<<__domain__>>
   http:
-  - route:
+  - name: "perfecta-route"
+    match:
+    - uri: 
+        prefix: "/perfecta"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: hawkeye-perfecta-api.hawkeye-perfecta.svc.cluster.local
+        port:
+          number: 5000
+  - name: "default-route"
+    route:
     - destination:
         host: hawkeye.hawkeye-dashboard.svc.cluster.local
         port:
