@@ -18,6 +18,7 @@ spec:
       allowCredentials: true
       allowMethods:
       - GET
+      - HEAD
       - POST
       - OPTIONS
       maxAge: "24h"
