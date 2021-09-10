@@ -15,8 +15,8 @@ spec:
         filterChain:
           filter:
             name: envoy.filters.network.http_connection_manager
-          subFilter:
-            name: envoy.filters.http.jwt_authn
+            subFilter:
+              name: envoy.filters.http.jwt_authn
     patch:
       operation: MERGE
       value:
