@@ -8,5 +8,6 @@ resources:
 - ingress-class.yaml
 - cluster-local-gateway.yaml
 - cluster-local-gateway-authorizationpolicy.yaml
+- allow-preflight-authorizationpolicy.yaml
 - deny-all-authorizationpolicy.yaml
 # - monitoring/
