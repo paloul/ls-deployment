@@ -2,7 +2,7 @@
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: istio-ingressgateway
+  name: istio-ingressgateway-allow-preflight
   namespace: istio-system
 spec:
   action: ALLOW
