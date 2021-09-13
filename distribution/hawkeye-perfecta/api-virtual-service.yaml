@@ -21,4 +21,6 @@ spec:
       - POST
       - GET
       allowCredentials: true
+      allowHeaders:
+      - Content-Type
       maxAge: "24h"
