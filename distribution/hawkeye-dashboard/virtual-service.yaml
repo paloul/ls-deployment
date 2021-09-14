@@ -29,6 +29,8 @@ spec:
       - POST
       - GET
       allowCredentials: true
+      allowHeaders:
+      - Content-Type
       maxAge: "24h"
   - name: "default-route"
     route:
