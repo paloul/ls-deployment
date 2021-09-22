@@ -41,9 +41,6 @@ spec:
             limits:
               memory: "1.25Gi"
               cpu: "1900m"
-          env:
-            - name: REACT_APP_PERFECTA_ENDPOINT
-              value: "https://dashboard.hawkeye.beyond.ai/perfecta/api/v1/feature_frame"
       nodeSelector:
         node-class: "front-end"
       tolerations:
