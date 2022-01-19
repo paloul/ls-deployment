@@ -66,6 +66,8 @@ spec:
       #   value: openid
       # - name: extraArgs.skip-oidc-discovery
       #   value: "true"
+      - name: extraArgs.skip-jwt-bearer-tokens
+        value: "true"
       - name: extraArgs.insecure-oidc-allow-unverified-email
         value: "true"
       - name: extraArgs.session-store-type
