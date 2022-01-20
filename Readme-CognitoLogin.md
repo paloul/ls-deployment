@@ -68,6 +68,58 @@ This is in direct comparison to a different flow known as `Client Credentials` w
 connected to only one external tenant/company/client/etc via specific Client Id and Secret pair.
 
 ### Generating Tokens programmatically
+Cognito provides a RESTful interface to generate and retrieve tokens. The only extra step required
+before submitting the RESTful API request is to generate a unique SECRET HASH from the combination of
+three data fields: Client Id, Client Secret and Username. 
+
+The POST API call expects the following data in the request body:
+```
+{
+    "AuthParameters": {
+        "USERNAME": "user@company.com",
+        "PASSWORD": "userpa$$word",
+        "SECRET_HASH": "0nsiY6WMsNSFzQTftIWz9rcSISW3sRVViTZefH7xfDs="
+    },
+    "AuthFlow": "USER_PASSWORD_AUTH",
+    "ClientId": "28chfb9s239131j9mrc1blagag"
+}
+```
+In the above data structure, only the SECRET_HASH field is generated. It is generated with the 
+following Python snippet of code. 
+```
+>>> import hmac
+>>> import base64
+>>> import hashlib
+
+>>> username = b"user@company.com"
+>>> appClientId = b"123zsf123basdlfkj"
+>>> appClientSecret = b"asdf0asdf2jd4asdasdfasdfasdf123asdf123"
+
+>>> signed = hmac.new(appClientSecret, username+appClientId, digestmod=hashlib.sha256)
+>>> secret_hash = base64.b64encode(signed.digest())
+>>> secret_hash
+
+b'0nsiY6WMsNSFzQTftIWz9rcSISW3sRVViTZefH7xfDs='
+```
+The generated SECRET_HASH is unique for each User requesting ID tokens. The User's password is not used
+in generating the SECRET_HASH. The SECRET_HASH should be provided to the customer and can be used by 
+the User indefinitely. The use of the SECRET_HASH removes the need to share the ClientSecret with the
+tenant/customer/client/etc. The ClientSecret remains in Beyond Limits' possession and should remain 
+confidential. Beyond Limits will generate the SECRET_HASH for each unique user requesting access to 
+the application, after which the users can proceed to call the following Cognito POST API endpoint
+with the data and generate tokens. 
+
+The RESTful API endpoint is: `https://cognito-idp.us-west-2.amazonaws.com`. The region in the URL needs
+to match the Region of the Cognito UserPool deployed for the application. Hawkeye's Cognito service is
+currently deployed in Oregon (us-west-2). If the application's Cognito service is deployed in another
+region, update the URL appropriately. 
+
+Two specific headers need to be defined for the request to function correctly:  
+```X-Amz-Target AWSCognitoIdentityProviderService.InitiateAuth```   
+```Content-Type application/x-amz-json-1.1```
+
+Fill in the correct parameters in the JSON structure above and submit the request. The request needs 
+to be a POST.
 
 ## References 
 [Stackoverflow - What is the REST (or CLI) API for logging in to Amazon Cognito user pools](https://stackoverflow.com/questions/37941780/what-is-the-rest-or-cli-api-for-logging-in-to-amazon-cognito-user-pools/53343689#53343689)
