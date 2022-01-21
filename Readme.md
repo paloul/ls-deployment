@@ -114,6 +114,9 @@ Make sure you are using the right AWS Profile. Set the following to make sure yo
 ```
 # !! IMPORTANT !!
 export AWS_PROFILE=bl-lifesignals
+
+## You should also set the Region if dealing with a region other than your default
+export AWS_REGION=ap-southeast-1
 ```
 
 ### <u>Kubernetes Cluster Autoscaler</u> - [Additional Info](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)
@@ -123,8 +126,8 @@ Create the Policy and Role for the Cluster Autoscaler to work properly:
 ```
 # The policy file is already included as part of this repo
 aws iam create-policy \
-    --policy-name AmazonEKSClusterAutoscalerPolicy \
-    --policy-document file://cluster-autoscaler-policy.json
+    --policy-name AmazonEKSClusterAutoscalerPolicyHawkeyeMeit \
+    --policy-document file://iam-policies/ap-southeast-1/cluster-autoscaler-policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
 You can now make a new role with the policy attached. You can create an IAM role and attach an IAM policy  
@@ -133,10 +136,10 @@ to it using eksctl.
 # Replace the attach-policy-arn field with the arn of the policy created above. 
 # Put your cluster name in the cluster field.
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=hawkeye-meit \
   --namespace=kube-system \
   --name=cluster-autoscaler \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterAutoscalerPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterAutoscalerPolicyHawkeyeMeit \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -150,8 +153,8 @@ You will first have to create the Policy and Role for the external-dns system to
 ```
 # The policy file is already included as part of this repo
 aws iam create-policy \
-    --policy-name AmazonEKSClusterExternalDnsPolicy \
-    --policy-document file://external-dns-policy.json
+    --policy-name AmazonEKSClusterExternalDnsPolicyHawkeyeMeit \
+    --policy-document file://iam-policies/ap-southeast-1/external-dns-policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
 You can now make a new role with the policy attached. You can create an IAM role and attach an IAM policy  
@@ -160,10 +163,10 @@ to it using eksctl.
 # Replace the attach-policy-arn field with the arn of the policy created above. 
 # Put your cluster name in the cluster field.
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=hawkeye-meit \
   --namespace=kube-system \
   --name=external-dns \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterExternalDnsPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterExternalDnsPolicyHawkeyeMeit \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -180,8 +183,8 @@ version is used, then make sure to update the IAM Policy for the LB Controller h
 # Create an IAM policy from the json already downloaded, lb-controller-iam_policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy \
-    --policy-document file://lb-controller-v2_2_0-iam_policy.json
+    --policy-name AWSLoadBalancerControllerIAMPolicyHawkeyeMeit \
+    --policy-document file://iam-policies/ap-southeast-1/lb-controller-v2_2_0-iam_policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
 You can now make a new role with policy attached. You can create an IAM role and attach an IAM policy  
@@ -191,10 +194,10 @@ to it using eksctl.
 # aws-load-balancer-controller in the kube-system namespace
 # Get the policy ARN from the AWS IAM Policy Console
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=hawkeye-meit \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicyHawkeyeMeit \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -205,8 +208,8 @@ Create the policy and the role to access the Secret stoe in AWS Secret Manager.
 # Create an IAM policy from the json already downloaded, external-secrets-iam-policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSExternalSecretsDevHawkeyeIAMPolicy \
-    --policy-document file://external-secrets-iam-policy.json
+    --policy-name AWSExternalSecretsDevHawkeyeIAMPolicyHawkeyeMeit \
+    --policy-document file://iam-policies/ap-southeast-1/external-secrets-iam-policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
 You can now make a new role with policy attached. You can create an IAM role and attach an IAM policy  
@@ -217,10 +220,10 @@ to it using eksctl.
 # Get the policy ARN from the AWS IAM Policy Console
 # Update the cluster name if different
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=hawkeye-meit \
   --namespace=kube-system \
   --name=external-secrets \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsDevHawkeyeIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsDevHawkeyeIAMPolicyHawkeyeMeit \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -232,8 +235,8 @@ records to Route53 in order to solve the DNS01 challenge. To enable this, create
 # Create an IAM policy from the json already downloaded, cert-manager-iam_policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSCertManagerIAMPolicy \
-    --policy-document file://cert-manager-iam_policy.json
+    --policy-name AWSCertManagerIAMPolicyHawkeyeMeit \
+    --policy-document file://iam-policies/ap-southeast-1/cert-manager-iam_policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
 You can now make a new role with policy attached. You can create an IAM role and attach an IAM policy  
@@ -244,10 +247,10 @@ to it using eksctl.
 # Update the cluster value
 # Update the attach-policy-arn value with the arn of the policy created above
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=hawkeye-meit \
   --namespace=cert-manager \
   --name=cert-manager \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSCertManagerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSCertManagerIAMPolicyHawkeyeMeit \
   --override-existing-serviceaccounts \
   --approve
 ```
