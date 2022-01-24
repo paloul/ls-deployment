@@ -48,7 +48,7 @@ spec:
             - name: CLUSTER.DEPLOY.CLOUD
               value: "true"
             - name: PERFECTA.WORKERS.NUM
-              value: "1"
+              value: "2"
             - name: PERFECTA.ENCRYPTED
               value: "false"
             - name: PERFECTA.TIMEOUT

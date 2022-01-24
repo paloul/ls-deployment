@@ -17,7 +17,7 @@ metadata:
     environment: development
     creator: paloul
     project: hawkeye
-    cluster: hawkeye
+    cluster: hawkeye-meit
 
 iam:
   # https://eksctl.io/usage/schema/#iam-withOIDC
@@ -37,7 +37,7 @@ vpc:
 # Add all possible AZs to ensure nodes can be spun up in any AZ later on. 
 # THIS CAN'T BE CHANGED LATER. YOU WILL HAVE TO CREATE A NEW CLUSTER TO ADD NEW AZ SUPPORT.
 # This list applies to the whole cluster and isn't specific to nodegroups
-availabilityZones: ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
+availabilityZones: ["ap-southeast-1a"]
 
 nodeGroups:
   - name: ng-util
@@ -47,7 +47,7 @@ nodeGroups:
     volumeSize: 80
     volumeType: gp3
     instanceType: t3a.large 
-    availabilityZones: ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
+    availabilityZones: ["ap-southeast-1a"]
     labels:
       node-class: "utility"
     tags:
@@ -71,7 +71,7 @@ nodeGroups:
     volumeSize: 80
     volumeType: gp3
     instanceType: t3a.small
-    availabilityZones: ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
+    availabilityZones: ["ap-southeast-1a"]
     labels:
       node-class: "front-end"
     taints:
@@ -97,8 +97,8 @@ nodeGroups:
     maxSize: 3
     volumeSize: 80
     volumeType: gp3
-    instanceType: t3a.medium
-    availabilityZones: ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
+    instanceType: t3.xlarge
+    availabilityZones: ["ap-southeast-1a"]
     labels:
       node-class: "perfecta"
     taints:
