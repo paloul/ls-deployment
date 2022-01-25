@@ -43,21 +43,21 @@ spec:
       - name: extraArgs.skip-provider-button
         value: "true"
       - name: extraArgs.cookie-domain
-        value: .<<__domain__>>
+        value: .hawkeye-meit.beyond.ai
       - name: extraArgs.whitelist-domain
-        value: .<<__domain__>>
+        value: .hawkeye-meit.beyond.ai
       - name: extraArgs.oidc-issuer-url
-        value: <<__oidc.issuer__>>
+        value: https://cognito-idp.ap-southeast-1.amazonaws.com/ap-southeast-1_2IjfFUhC7
       # - name: extraArgs.login-url
-      #   value: "https://<<__subdomain_auth__>>.<<__oidc.issuer__>>/auth/realms/kubeflow/protocol/openid-connect/auth"
+      #   value: "https://auth.https://cognito-idp.ap-southeast-1.amazonaws.com/ap-southeast-1_2IjfFUhC7/auth/realms/kubeflow/protocol/openid-connect/auth"
       # - name: extraArgs.oidc-jwks-url
-      #   value: "https://<<__oidc.issuer__>>/keys"
+      #   value: "https://https://cognito-idp.ap-southeast-1.amazonaws.com/ap-southeast-1_2IjfFUhC7/keys"
       # - name: extraArgs.redeem-url
-      #   value: "https://<<__subdomain_auth__>>.<<__oidc.issuer__>>/auth/realms/kubeflow/protocol/openid-connect/token"
+      #   value: "https://auth.https://cognito-idp.ap-southeast-1.amazonaws.com/ap-southeast-1_2IjfFUhC7/auth/realms/kubeflow/protocol/openid-connect/token"
       # - name: extraArgs.profile-url
-      #   value: "https://<<__subdomain_auth__>>.<<__oidc.issuer__>>/auth/realms/kubeflow/protocol/openid-connect/userinfo"
+      #   value: "https://auth.https://cognito-idp.ap-southeast-1.amazonaws.com/ap-southeast-1_2IjfFUhC7/auth/realms/kubeflow/protocol/openid-connect/userinfo"
       # - name: extraArgs.validate-url
-      #   value: "https://<<__subdomain_auth__>>.<<__oidc.issuer__>>.nl/auth/realms/kubeflow/protocol/openid-connect/userinfo"
+      #   value: "https://auth.https://cognito-idp.ap-southeast-1.amazonaws.com/ap-southeast-1_2IjfFUhC7.nl/auth/realms/kubeflow/protocol/openid-connect/userinfo"
       # - name: extraArgs.scope
       #   value: email
       # - name: extraArgs.scope
@@ -73,7 +73,7 @@ spec:
       - name: extraArgs.session-store-type
         value: "redis"
       - name: extraArgs.redis-connection-url
-        value: <<__oidc.redis.connection_url__>>
+        value: redis://hawkeye-meit.w98oi8.0001.apse1.cache.amazonaws.com:6379
     repoURL: https://oauth2-proxy.github.io/manifests
     targetRevision: 3.3.2
   destination:

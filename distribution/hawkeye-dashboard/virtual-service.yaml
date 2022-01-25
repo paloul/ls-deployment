@@ -7,7 +7,7 @@ spec:
   gateways:
   - hawkeye-gateway
   hosts:
-  - <<__subdomain_dashboard__>>.<<__domain__>>
+  - dashboard.hawkeye-meit.beyond.ai
   http:
   - name: "perfecta-route"
     match:

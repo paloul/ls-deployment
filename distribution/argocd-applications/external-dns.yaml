@@ -13,9 +13,9 @@ spec:
     helm:
       parameters:
       - name: aws.region
-        value: <<__aws_region__>>
+        value: ap-southeast-1
       - name: domainFilters[0]
-        value: <<__route53.hosted_zone_domain__>>
+        value: hawkeye-meit.beyond.ai
       - name: serviceAccount.create
         value: "true"
       - name: rbac.create
@@ -37,9 +37,9 @@ spec:
       - name: sources[3]
         value: istio-virtualservice
       # - name: aws.assumeRolenArn
-      #   value: <<__role_arn.external_dns__>>
+      #   value: arn:aws:iam::113151489485:role/eksctl-hawkeye-meit-addon-iamserviceaccount-Role1-8OZLGFCH4GVM
       - name: serviceAccount.annotations.eks\.amazonaws\.com/role-arn
-        value: <<__role_arn.external_dns__>>
+        value: arn:aws:iam::113151489485:role/eksctl-hawkeye-meit-addon-iamserviceaccount-Role1-8OZLGFCH4GVM
     repoURL: https://charts.bitnami.com/bitnami
     targetRevision: 5.0.2
   syncPolicy:

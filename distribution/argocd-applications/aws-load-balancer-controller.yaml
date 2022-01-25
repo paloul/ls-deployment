@@ -15,15 +15,15 @@ spec:
     helm:
       parameters:
         - name: serviceAccount.annotations.eks\.amazonaws\.com/role-arn
-          value: <<__role_arn.loadbalancer_controller__>>
+          value: arn:aws:iam::113151489485:role/eksctl-hawkeye-meit-addon-iamserviceaccount-Role1-QHFNI2NCHDIV
         - name: clusterName
-          value: <<__cluster_name__>>
+          value: hawkeye-meit
         - name: image.repository
           value: amazon/aws-alb-ingress-controller
         - name: vpcId
-          value: <<__vpc_id__>>
+          value: vpc-0d04e4f65d6f87e59
         - name: region
-          value: <<__aws_region__>>
+          value: ap-southeast-1
         - name: serviceAccount.create
           value: "true"
         - name: rbac.create

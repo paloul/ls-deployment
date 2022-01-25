@@ -21,5 +21,5 @@ resources:
   - argocd-applications/metrics-server.yaml
 
   ## Hawkeye
-  - argocd-applications/hawkeye-dashboard.yaml
+  #- argocd-applications/hawkeye-dashboard.yaml
   - argocd-applications/hawkeye-perfecta.yaml
