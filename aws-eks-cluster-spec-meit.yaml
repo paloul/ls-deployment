@@ -11,7 +11,7 @@ metadata:
   name: hawkeye-meit
   # choose your region wisely, this will significantly impact the cost incurred
   region: ap-southeast-1 # Singapore
-  version: '1.20' 
+  version: '1.18' 
   tags:
     # Add more cloud tags if needed for billing
     environment: development
@@ -37,7 +37,7 @@ vpc:
 # Add all possible AZs to ensure nodes can be spun up in any AZ later on. 
 # THIS CAN'T BE CHANGED LATER. YOU WILL HAVE TO CREATE A NEW CLUSTER TO ADD NEW AZ SUPPORT.
 # This list applies to the whole cluster and isn't specific to nodegroups
-availabilityZones: ["ap-southeast-1a", "ap-southeast-1b"]
+availabilityZones: ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
 
 nodeGroups:
   - name: ng-util
@@ -47,7 +47,7 @@ nodeGroups:
     volumeSize: 80
     volumeType: gp3
     instanceType: t3a.large 
-    availabilityZones: ["ap-southeast-1a"]
+    availabilityZones: ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
     labels:
       node-class: "utility"
     tags:
