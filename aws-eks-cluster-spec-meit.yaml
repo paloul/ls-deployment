@@ -16,7 +16,7 @@ metadata:
     # Add more cloud tags if needed for billing
     environment: development
     creator: paloul
-    project: hawkeye
+    project: hawkeye-meit
     cluster: hawkeye-meit
 
 iam:
