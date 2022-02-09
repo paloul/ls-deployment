@@ -121,6 +121,68 @@ Two specific headers need to be defined for the request to function correctly:
 Fill in the correct parameters in the JSON structure above and submit the request. The request needs 
 to be a POST.
 
+## Authentication Result Response
+The response to the above request will be a JSON structure containing an Authentication Result property 
+with Access Token, Id Token and Refresh Token.
+```
+{
+    "AuthenticationResult": {
+        "AccessToken": "eyJraWQiOi...yxaVXbWLi7e6T439A",
+        "ExpiresIn": 3600,
+        "IdToken": "eyJraWQiOiJZlJ...XD4D98c1i-iZm0A",
+        "RefreshToken": "eyJjdHiLC...1QXKAKtnmu72dA",
+        "TokenType": "Bearer"
+    },
+    "ChallengeParameters": {}
+}
+```
+
+## Authenticated API Requests
+Once you have the Authentication Result JSON response, you can make authenticated Hawkeye API requests.
+Extract the IdToken from the Authentication Result JSON response and use it in all subsequent Hawkeye
+API requests. The Id Token should be added as a Bearer type token as an Authorization header.
+```
+Key: Authorization 
+Value: Bearer eyJraWQiOiJZlJ...XD4D98c1i-iZm0A
+```
+
+## Using the Refresh Token
+The option to refresh tokens is possible as well. Once you have Tokens generated from
+the main Initiate Auth call, you can use the Refresh Token and generate new Id Tokens without
+using your username/password combination.  
+The Request Body needs to be updated to reflect the request for Refresh Tokens.  
+**The Endpoint and any headers remain the same as above.**
+```
+# Example Refresh Token POST Body
+{
+    "AuthParameters": {
+        "REFRESH_TOKEN": "eyJjdHiLC...1QXKAKtnmu72dA",
+        "SECRET_HASH": "c932...vdd3"
+    },
+    "AuthFlow": "REFRESH_TOKEN_AUTH",
+    "ClientId": "68u17si0t3apv22e4o06h1i41t"
+}
+```
+Changes to POST Body:  
+1. Set the "AuthFlow" property value to "REFRESH_TOKEN_AUTH"
+2. Remove the "USERNAME" and "PASSWORD" properties from "AuthParameters"
+3. Add a "REFRESH_TOKEN" property to "AuthParameters" and set its value to the refresh token
+4. Set the "SECRET_HASH" value to the actual Client Secret provided to you without modification  
+
+You will receive a similar JSON Authentication Result response as above, minus a Refresh Token.
+```
+{
+    "AuthenticationResult": {
+        "AccessToken": "eyJraWQiOi...vPVhtQ",
+        "ExpiresIn": 3600,
+        "IdToken": "eyJraWQiO...KfX_daLNqpA",
+        "TokenType": "Bearer"
+    },
+    "ChallengeParameters": {}
+}
+```
+
+
 ## References 
 [Stackoverflow - What is the REST (or CLI) API for logging in to Amazon Cognito user pools](https://stackoverflow.com/questions/37941780/what-is-the-rest-or-cli-api-for-logging-in-to-amazon-cognito-user-pools/53343689#53343689)
 
