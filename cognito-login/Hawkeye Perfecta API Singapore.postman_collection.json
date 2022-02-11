@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "d1aea6c3-a9a3-41e3-8565-33dc5c047d17",
+		"name": "Hawkeye Perfecta API Singapore",
+		"description": "This is a collection of APIs for the Life Signals project for Beyond Limits",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Options Preflight",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "OPTIONS",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					},
+					{
+						"key": "Access-Control-Request-Method",
+						"value": "GET,POST",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://perfecta.hawkeye-meit.beyond.ai",
+					"protocol": "https",
+					"host": [
+						"perfecta",
+						"hawkeye-meit",
+						"beyond",
+						"ai"
+					]
+				},
+				"description": "Checks the basic health of the cluster"
+			},
+			"response": []
+		},
+		{
+			"name": "Is Alive (Core Routes)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://perfecta.hawkeye-meit.beyond.ai/api/is_alive",
+					"protocol": "https",
+					"host": [
+						"perfecta",
+						"hawkeye-meit",
+						"beyond",
+						"ai"
+					],
+					"path": [
+						"api",
+						"is_alive"
+					]
+				},
+				"description": "Checks the basic health of the cluster"
+			},
+			"response": []
+		},
+		{
+			"name": "Is Alive",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://perfecta.hawkeye-meit.beyond.ai/api/v1/is_alive",
+					"protocol": "https",
+					"host": [
+						"perfecta",
+						"hawkeye-meit",
+						"beyond",
+						"ai"
+					],
+					"path": [
+						"api",
+						"v1",
+						"is_alive"
+					]
+				},
+				"description": "Checks the basic health of the cluster"
+			},
+			"response": []
+		},
+		{
+			"name": "Versions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://perfecta.hawkeye-meit.beyond.ai/api/v1/versions",
+					"protocol": "https",
+					"host": [
+						"perfecta",
+						"hawkeye-meit",
+						"beyond",
+						"ai"
+					],
+					"path": [
+						"api",
+						"v1",
+						"versions"
+					]
+				},
+				"description": "Gets the versions of both cluster and perfecta reasoner"
+			},
+			"response": []
+		},
+		{
+			"name": "Feature Frame Reason",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"age\": 450,\r\n    \"bioSensorId\": \"GeorgePaloulian123\",\r\n    \"heartRate\": 90,\r\n    \"respRate\": 20,\r\n    \"skinTempChest\": 12.4,\r\n    \"gender\": 1,\r\n    \"height\": 35,\r\n    \"patientId\": \"GeorgePaloulian\",\r\n    \"physActivity\": 0,\r\n    \"posture\": 1,\r\n    \"healthStatus\": 1,\r\n    \"seqNo\": 234234234,\r\n    \"time\": 1233312554,\r\n    \"weight\": 341.12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://perfecta.hawkeye-meit.beyond.ai/api/v1/feature_frame",
+					"protocol": "https",
+					"host": [
+						"perfecta",
+						"hawkeye-meit",
+						"beyond",
+						"ai"
+					],
+					"path": [
+						"api",
+						"v1",
+						"feature_frame"
+					]
+				},
+				"description": "Checks the basic health of the cluster"
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Patient State",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"patientId\": \"BillBixby8\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://perfecta.hawkeye-meit.beyond.ai/api/v1/reset_patient",
+					"protocol": "https",
+					"host": [
+						"perfecta",
+						"hawkeye-meit",
+						"beyond",
+						"ai"
+					],
+					"path": [
+						"api",
+						"v1",
+						"reset_patient"
+					]
+				},
+				"description": "Reset the patient state inside the cluster without removing the actor from memory"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove and Stop Patient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"patientId\": \"GeorgePaloulian\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://perfecta.hawkeye-meit.beyond.ai/api/v1/remove_patient",
+					"protocol": "https",
+					"host": [
+						"perfecta",
+						"hawkeye-meit",
+						"beyond",
+						"ai"
+					],
+					"path": [
+						"api",
+						"v1",
+						"remove_patient"
+					]
+				},
+				"description": "Stop and remove patient from the cluster memory, including its state from any persistent store"
+			},
+			"response": []
+		},
+		{
+			"name": "Cognito - Raw Auth",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Amz-Target",
+						"value": "AWSCognitoIdentityProviderService.InitiateAuth",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-amz-json-1.1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AuthParameters\": {\r\n        \"USERNAME\": \"beyondlimits@meit.com.sg\",\r\n        \"PASSWORD\": \"ChangeThis\",\r\n        \"SECRET_HASH\": \"xN4H6/V9LQ8vXLTl7GhGnRHYMijghPFVe4ddFYpuzbY=\"\r\n    },\r\n    \"AuthFlow\": \"USER_PASSWORD_AUTH\",\r\n    \"ClientId\": \"68u17si0t3apv22e4o06h1i41t\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cognito-idp.ap-southeast-1.amazonaws.com",
+					"protocol": "https",
+					"host": [
+						"cognito-idp",
+						"ap-southeast-1",
+						"amazonaws",
+						"com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cognito - Raw Refresh Token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Amz-Target",
+						"value": "AWSCognitoIdentityProviderService.InitiateAuth",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-amz-json-1.1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AuthParameters\": {\r\n        \"REFRESH_TOKEN\": \"eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.MClNZ3nFNglvpKpY6sEXNY5McpK-b8NYbT16IdcQDScUqccvBwNdFTeMDXtlDnrxh1IRu8rw4026WgE5HTxspu4PjbMahFXYpAJUWr5xL_7kYmyAExzj3nGNHtTayqTkJoTGKuQgJJPZLJa5XVkSAUOi7S4cAD_zT9Bmndz2qi8kOdoCcqV9YOhXs-gclPnmnzqNOc4FXdN3fp94Jmd-P-Yakf3yS-1Kt5y5QI_OsqXJWJXIKTBK_b-UbbtzSDVfPIRRjACELnczREnok27D3K_occ0gS0LbZAP0GKERP_gvvOJzsprvOjQlowBQKNbCgJZhrs6Q6LUW7PtvP86koA.sZczPakO2pTY6hRr.7y0dH2HK_zZ0R2X9z6hM4BVMggkL29YrF3gk-jrVBnl5OSi7CjOBwqenK2EcZQAE20YEqWKUIKMQpkE45IpVcFErXAhcQLOsi02GENu1I1DR3fA2iqom_2LSEnrh60u6wZQka_RdKANzgoUS9oM56MYcni_o8rShWBRj07MVOlr4QVVf7obEb6PmpjiJrehm6ijSRlirmhm47qThQCl0FQZHjSwlagzbs55IY5jLyS0NKAPXK_mv7x1jwY2vEhDhJ5ItAvjwHtQhYrh2YxWZsjZA7XnAxntFuCYTnMwAHcKSQY9jgNgXfyrl3Pc7gKxhst-CmuHk2ajfpq-cA7W1wbyihyKRS7qsZgFdDa7EDnsUXA2ExevdFI2ooZKrr1tEz_5_MXkF0xOdyk3JPF3Df4Jq1HtXqIIu1xuU2TpapkCq9KG-hDu_tzqZIxXjQ4-3_o5kAbRCgU2yfsuyOfy_50d__IFLVTSZv-_5TAex788XIuOK6Khi062MKGynYnlffgN2IOxIJkbWuUndUy4P88G15IorL9T7YgwKGCoYR8GDX5fencbnCvYZVbgRZxNuYeXmyRC2tRQR9BsEwgfZVE1qgXok4sheURlXmNwCwjA0YcEyYALV1PDFOC2IBBOZIIUqCpSjL76_-rXvE7wjtfhEwSC_wmWjE3_A-B8QhBmZGgGSVi0X93S_bS9UDyTOFrrvVTH-MpPCAxdUuqCmEWthSkH7d1F3CJBo_t1rqr6grTB-5iKAbTKEoFQ4up383viy-F6dY8bSPPNGlKdK7apqtyhbNswGM99FlLp1C65hK1ujqZ1j_GSNcf4hazzqFhHgnW5CXKeoKTUkrkauIhUz1beOtmptL9yLGJt9KS67i8gxP3C9xs52adTzPakpBLaz0fKsUNDnhCYHtnOGCplwoBps2Jll3uXOCWO7QlAj7pAWc7LW8hxbx8v3Nc9BjULoeN4VrgY2krICd882mny0eVbeGf-OQW882YBSLvBFE5EzGPeWU7sOrc0k4x3G03eI9ot8kii62znkSF4G1CEk8Nxcm86idyX3sCjTlbayP5ePod2AZF1B3K92kISmX9aWojNAmCV5knnzB8Iu44JhiD1_WYwf8MNr_NSkvSvncDozB5XqwXZ8rU8bKpUWalYXUGhohkQzrVh8z3JLvfiMvm62ZYPJnH722htz-CeKEUYctRIoMcPO7RKa5L1hLGtChfpGZa5tTJRVKNiQdzplyGBIqi45LLmQjVMM6FH-9fnw-q_GGulTmCjIAub4vfHZd4Jxo2x9SqT3E6iGuhg0_ZxMPsQlCWYNy0aPntSbsQPhp4GaR7ILT0k428RwS43skuwPVcdN.Yyfe1NTMSnehPw7X_cDRfw\",\r\n        \"SECRET_HASH\": \"c932k...dd3\"\r\n    },\r\n    \"AuthFlow\": \"REFRESH_TOKEN_AUTH\",\r\n    \"ClientId\": \"68u17si0t3apv22e4o06h1i41t\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cognito-idp.ap-southeast-1.amazonaws.com",
+					"protocol": "https",
+					"host": [
+						"cognito-idp",
+						"ap-southeast-1",
+						"amazonaws",
+						"com"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJraWQiOiJuZlJKN2tuKzNMQkF5b0NGY0NBT0ZkNmt0b0tuOVF6SHZFVmg5MGloQm9vPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI3OWU1ZGMzMi1hZTVmLTRmNWUtOWVhYS0xYzhkNmJmYjFlNzMiLCJhdWQiOiI2OHUxN3NpMHQzYXB2MjJlNG8wNmgxaTQxdCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJldmVudF9pZCI6ImI4NWExOGFlLWI3ZTYtNDAxMC1hMjZjLWI5OTJhZTI0ZTA0ZiIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjQ0NTM0NDMwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtc291dGhlYXN0LTFfMklqZkZVaEM3IiwiY29nbml0bzp1c2VybmFtZSI6Ijc5ZTVkYzMyLWFlNWYtNGY1ZS05ZWFhLTFjOGQ2YmZiMWU3MyIsImV4cCI6MTY0NDUzODAzMCwiaWF0IjoxNjQ0NTM0NDMwLCJlbWFpbCI6InBhbG91bEBtZS5jb20ifQ.dSezsHadoZxDwbpJz8EkOOyxce0ZNLkUx4dSAjw72HtJAEZ7Y2hYefjqDu_OrHtDpDwVsUvfBwu0yo74vKYbK-ej-5t6-P28LqynB-KmJRbPZJWWIYyBzrghkyFeWzGB2vTXNsSgPf-jChyj_CU228X9Q-M4coAW9vPXzGBHZ9nXyJaGIIan61UiwIARj6NKVGHsO4Ku5AIX_qjf9pX96_7G2OsOhupJIsXhplGFaIukfjxNBkk9FkSGMww_Fa2iCKrj8SCMWz1GBXBfMCa-tZckdL7eCf_Tj8GlSVvu-V_PwmohsNbAPfNhpsZw6ALQNMr7vyd50LflBDIS4SdF7Q",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
