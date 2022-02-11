@@ -1,4 +1,6 @@
-# Authentication - Hawkeye MEIT
+# Hawkeye MEIT
+
+## Authentication
 
 User accounts will be provided to you via AWS Cognito platform. Upon receiving your email login, 
 you will be given a temporary password, please proceed to set a new password. This will be a 
@@ -10,7 +12,7 @@ You can try to login at the Cognito hosted login page for Hawkeye MEIT:
 Hawkeye MEIT **does not** have any associated UI or dashboard. It is setup to offer only APIs for 
 machine-to-machine interaction.
 
-## <u>Programmatic Login for machine-to-machine interaction</u>
+### <u>Programmatic Login for machine-to-machine interaction</u>
 We need to generate an ID Token to be used with the cluster and authenticate the API requests. 
 AWS Cognito provides the means to generate a set of ID, Refresh and Access Tokens as JWT tokens. 
 Once generated and in possession of an ID Token, HTTP requests can embed them within an Authorization 
@@ -49,7 +51,7 @@ to the POST request.
 
 Finally, fill in the correct parameters for the POST body and submit the request. 
 
-## <u>Authentication Result Response</u>
+### <u>Authentication Result Response</u>
 The response to the above request will be a JSON structure containing an Authentication Result property 
 with Access Token, Id Token and Refresh Token.
 ```
@@ -65,7 +67,7 @@ with Access Token, Id Token and Refresh Token.
 }
 ```
 
-## <u>Authenticated API Requests</u>
+### <u>Authenticated API Requests</u>
 Once you have the Authentication Result JSON response, you can make authenticated Hawkeye API requests.
 Extract the IdToken from the Authentication Result JSON response and use it in all subsequent Hawkeye
 API requests. The Id Token should be added as a Bearer type token to the Authorization header property.
